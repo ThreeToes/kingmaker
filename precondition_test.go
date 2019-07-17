@@ -4,7 +4,7 @@ import "testing"
 
 func TestAttributePrecondition_PreconditionMet(t *testing.T) {
 	type fields struct {
-		Attribute string
+		Attribute AttributeType
 		Operator  Operator
 		Value     int
 	}
@@ -35,8 +35,8 @@ func TestAttributePrecondition_PreconditionMet(t *testing.T) {
 				},
 			},
 			fields: fields{
-				Operator:  "=",
-				Attribute: "martial",
+				Operator:  EQUAL,
+				Attribute: MARTIAL,
 				Value:     10,
 			},
 		},
@@ -58,8 +58,8 @@ func TestAttributePrecondition_PreconditionMet(t *testing.T) {
 				},
 			},
 			fields: fields{
-				Operator:  "=",
-				Attribute: "stewardship",
+				Operator:  EQUAL,
+				Attribute: STEWARDSHIP,
 				Value:     10,
 			},
 		},
@@ -81,8 +81,8 @@ func TestAttributePrecondition_PreconditionMet(t *testing.T) {
 				},
 			},
 			fields: fields{
-				Operator:  ">",
-				Attribute: "intrigue",
+				Operator:  GREATER_THAN,
+				Attribute: INTRIGUE,
 				Value:     5,
 			},
 		},
@@ -104,8 +104,8 @@ func TestAttributePrecondition_PreconditionMet(t *testing.T) {
 				},
 			},
 			fields: fields{
-				Operator:  ">",
-				Attribute: "diplomacy",
+				Operator:  GREATER_THAN,
+				Attribute: DIPLOMACY,
 				Value:     5,
 			},
 		},
@@ -127,8 +127,8 @@ func TestAttributePrecondition_PreconditionMet(t *testing.T) {
 				},
 			},
 			fields: fields{
-				Operator:  "<",
-				Attribute: "martial",
+				Operator:  LESS_THAN,
+				Attribute: MARTIAL,
 				Value:     20,
 			},
 		},
@@ -150,8 +150,8 @@ func TestAttributePrecondition_PreconditionMet(t *testing.T) {
 				},
 			},
 			fields: fields{
-				Operator:  "<",
-				Attribute: "martial",
+				Operator:  LESS_THAN,
+				Attribute: MARTIAL,
 				Value:     20,
 			},
 		},
@@ -173,8 +173,8 @@ func TestAttributePrecondition_PreconditionMet(t *testing.T) {
 				},
 			},
 			fields: fields{
-				Operator:  "!=",
-				Attribute: "learning",
+				Operator:  NOT_EQUAL,
+				Attribute: LEARNING,
 				Value:     20,
 			},
 		},
@@ -196,8 +196,8 @@ func TestAttributePrecondition_PreconditionMet(t *testing.T) {
 				},
 			},
 			fields: fields{
-				Operator:  "!=",
-				Attribute: "learning",
+				Operator:  NOT_EQUAL,
+				Attribute: LEARNING,
 				Value:     10,
 			},
 		},

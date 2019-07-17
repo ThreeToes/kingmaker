@@ -1,14 +1,18 @@
 package kingmaker
 
-import "strings"
-
 type Operator string
+type AttributeType string
 
 const (
-	EQUAL        Operator = "="
-	GREATER_THAN Operator = ">"
-	LESS_THAN    Operator = "<"
-	NOT_EQUAL    Operator = "!="
+	EQUAL        Operator      = "="
+	GREATER_THAN Operator      = ">"
+	LESS_THAN    Operator      = "<"
+	NOT_EQUAL    Operator      = "!="
+	DIPLOMACY    AttributeType = "diplomacy"
+	MARTIAL      AttributeType = "martial"
+	LEARNING     AttributeType = "learning"
+	INTRIGUE     AttributeType = "intrigue"
+	STEWARDSHIP  AttributeType = "stewardship"
 )
 
 type Precondition interface {
@@ -16,9 +20,9 @@ type Precondition interface {
 }
 
 type AttributePrecondition struct {
-	Attribute string   `json:"attribute"`
-	Operator  Operator `json:"operator"`
-	Value     int      `json:"value"`
+	Attribute AttributeType `json:"attribute"`
+	Operator  Operator      `json:"operator"`
+	Value     int           `json:"value"`
 }
 
 func (p *AttributePrecondition) PreconditionMet(c *Character) bool {
@@ -36,17 +40,17 @@ func (p *AttributePrecondition) PreconditionMet(c *Character) bool {
 	return false
 }
 
-func getAttribute(c *Character, attr string) int {
-	switch strings.ToLower(attr) {
-	case "martial":
+func getAttribute(c *Character, attr AttributeType) int {
+	switch attr {
+	case MARTIAL:
 		return c.Attributes.Martial
-	case "learning":
+	case LEARNING:
 		return c.Attributes.Learning
-	case "diplomacy":
+	case DIPLOMACY:
 		return c.Attributes.Diplomacy
-	case "intrigue":
+	case INTRIGUE:
 		return c.Attributes.Intrigue
-	case "stewardship":
+	case STEWARDSHIP:
 		return c.Attributes.Stewardship
 	default:
 		return -1
