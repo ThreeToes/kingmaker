@@ -17,5 +17,11 @@ func (b *EventBag) DrawEvent() *Event {
 	}
 	elen := len(b.events)
 	choice := int(b.random.Uint32()) % elen
-	return b.events[choice]
+	event := b.events[choice]
+	if choice != elen {
+		b.events = append(b.events[:choice], b.events[choice+1:]...)
+	} else {
+		b.events = b.events[:choice]
+	}
+	return event
 }

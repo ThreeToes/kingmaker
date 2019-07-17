@@ -128,9 +128,11 @@ func TestEventBag_DrawEvent(t *testing.T) {
 				events: tt.fields.events,
 				random: random,
 			}
-			if got := b.DrawEvent(); !reflect.DeepEqual(got, tt.want) {
+			got := b.DrawEvent()
+			if !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("EventBag.DrawEvent() = %v, want %v", got, tt.want)
 			}
+			assert.NotContains(t, b.events, got)
 		})
 	}
 }
