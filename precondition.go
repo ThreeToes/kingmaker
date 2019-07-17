@@ -56,3 +56,22 @@ func getAttribute(c *Character, attr AttributeType) int {
 		return -1
 	}
 }
+
+type AgePrecondition struct {
+	Age      int      `json:"age"`
+	Operator Operator `json:"operator"`
+}
+
+func (a *AgePrecondition) PreconditionMet(c *Character) bool {
+	switch a.Operator {
+	case NOT_EQUAL:
+		return c.Age != a.Age
+	case EQUAL:
+		return c.Age == a.Age
+	case LESS_THAN:
+		return c.Age < a.Age
+	case GREATER_THAN:
+		return c.Age > a.Age
+	}
+	return false
+}

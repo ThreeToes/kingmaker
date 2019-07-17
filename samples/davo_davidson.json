@@ -1,0 +1,16 @@
+[
+  {
+    "id": "davo",
+    "given_name": "Davo",
+    "family_name": "Davidson",
+    "rank": 4,
+    "age": 17,
+    "attributes": {
+      "diplomacy": 10,
+      "intrigue": 10,
+      "martial": 10,
+      "stewardship": 10,
+      "learning": 10
+    }
+  }
+]

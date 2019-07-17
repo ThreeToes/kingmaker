@@ -1,5 +1,10 @@
 package kingmaker
 
+import (
+	"encoding/json"
+	"io/ioutil"
+)
+
 type Rank int
 
 const (
@@ -12,10 +17,12 @@ const (
 )
 
 type Character struct {
+	Id         string      `json:"id"`
 	GivenName  string      `json:"given_name"`
 	FamilyName string      `json:"family_name"`
 	Attributes *Attributes `json:"attributes"`
 	Rank       Rank        `json:"rank"`
+	Age        int         `json:"age"`
 }
 
 type Attributes struct {
@@ -24,4 +31,14 @@ type Attributes struct {
 	Martial     int
 	Intrigue    int
 	Stewardship int
+}
+
+func LoadCharacters(filepath string) ([]*Character, error) {
+	contents, err := ioutil.ReadFile(filepath)
+	if err != nil {
+		return nil, err
+	}
+	chars := []*Character{}
+	err = json.Unmarshal([]byte(contents), &chars)
+	return chars, err
 }

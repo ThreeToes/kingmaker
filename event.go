@@ -1,8 +1,9 @@
 package kingmaker
 
 type Event struct {
-	Preconditions []Precondition
-	Template      string
+	Id            string         `json:"id"`
+	Preconditions []Precondition `json:"preconditions"`
+	Template      string         `json:"template"`
 }
 
 func (e *Event) PreconditionsMet(c *Character) bool {
