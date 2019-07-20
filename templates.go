@@ -5,7 +5,7 @@ import (
 	"html/template"
 )
 
-func fillTemplate(w *World) (string, error) {
+func FillTemplate(w *EventContext) (string, error) {
 	tmpl, err := template.New("event").Parse(w.Event.Template)
 	if err != nil {
 		return "", err

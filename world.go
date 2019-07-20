@@ -1,6 +1,6 @@
 package kingmaker
 
 type World struct {
-	ActiveCharacter *Character
-	Event           *Event
+	Characters     []*Character
+	PossibleEvents []*Event
 }

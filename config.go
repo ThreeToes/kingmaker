@@ -3,8 +3,13 @@ package kingmaker
 import "flag"
 
 type Config struct {
-	CharacterFile string
-	EventFile     string
+	CharacterFile string `json:"character_file"`
+	EventFile     string `json:"event_file"`
+	WorldConfig   *struct {
+	}
+}
+
+type DateStructure struct {
 }
 
 func GetCmdConfig() *Config {

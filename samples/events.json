@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "id": "sickskid",
+    "template": "{{.ActiveCharacter.GivenName}} did a sick skid in his V8 Holden to impress some sheilas",
+    "preconditions": [
+      {
+        "age": 16,
+        "operator": ">"
+      }
+    ]
+  }
+]

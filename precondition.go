@@ -1,5 +1,9 @@
 package kingmaker
 
+import (
+	"encoding/json"
+)
+
 type Operator string
 type AttributeType string
 
@@ -74,4 +78,27 @@ func (a *AgePrecondition) PreconditionMet(c *Character) bool {
 		return c.Age > a.Age
 	}
 	return false
+}
+
+func unmarshalPrecondtions(j []*json.RawMessage) ([]Precondition, error) {
+	var ret []Precondition
+	for _, rm := range j {
+		var objMap map[string]json.RawMessage
+		err := json.Unmarshal(*rm, &objMap)
+		if err != nil {
+			return nil, err
+		}
+		var t Precondition
+		if _, ok := objMap["age"]; ok {
+			t = &AgePrecondition{}
+		} else if _, ok := objMap["attribute"]; ok {
+			t = &AttributePrecondition{}
+		}
+		err = json.Unmarshal(*rm, t)
+		if err != nil {
+			return nil, err
+		}
+		ret = append(ret, t)
+	}
+	return ret, nil
 }

@@ -4,7 +4,7 @@ import "testing"
 
 func Test_fillTemplate(t *testing.T) {
 	type args struct {
-		w *World
+		w *EventContext
 	}
 	tests := []struct {
 		name    string
@@ -14,7 +14,7 @@ func Test_fillTemplate(t *testing.T) {
 	}{
 		{
 			args: args{
-				w: &World{
+				w: &EventContext{
 					Event: &Event{
 						Template: "hello, world",
 					},
@@ -27,7 +27,7 @@ func Test_fillTemplate(t *testing.T) {
 		},
 		{
 			args: args{
-				w: &World{
+				w: &EventContext{
 					Event: &Event{
 						Template: "hello, {{.ActiveCharacter.GivenName}}",
 					},
@@ -42,7 +42,7 @@ func Test_fillTemplate(t *testing.T) {
 		},
 		{
 			args: args{
-				w: &World{
+				w: &EventContext{
 					Event: &Event{
 						Template: "hello, {{.ActiveCharacter.GivenName",
 					},
@@ -57,7 +57,7 @@ func Test_fillTemplate(t *testing.T) {
 		},
 		{
 			args: args{
-				w: &World{
+				w: &EventContext{
 					Event: &Event{
 						Template: "hello, {{.ActiveCharacter.NonExistentAttribute}}",
 					},
@@ -73,13 +73,13 @@ func Test_fillTemplate(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := fillTemplate(tt.args.w)
+			got, err := FillTemplate(tt.args.w)
 			if (err != nil) != tt.wantErr {
-				t.Errorf("fillTemplate() error = %v, wantErr %v", err, tt.wantErr)
+				t.Errorf("FillTemplate() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			if got != tt.want {
-				t.Errorf("fillTemplate() = %v, want %v", got, tt.want)
+				t.Errorf("FillTemplate() = %v, want %v", got, tt.want)
 			}
 		})
 	}

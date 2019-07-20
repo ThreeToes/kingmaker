@@ -25,7 +25,22 @@ func main() {
 		log.Println("Error while loading character file: ", err.Error())
 		os.Exit(1)
 	}
-	for _, c := range characters {
-		log.Printf("%+v\n", c)
+
+	events, err := kingmaker.LoadEvents(cfg.EventFile)
+	if err != nil {
+		log.Println("Error while loading events: ", err.Error())
+		os.Exit(1)
+	}
+
+	for _, e := range events {
+		for _, c := range characters {
+			if e.PreconditionsMet(c) {
+				s, _ := kingmaker.FillTemplate(&kingmaker.EventContext{
+					Event:           e,
+					ActiveCharacter: c,
+				})
+				log.Println(s)
+			}
+		}
 	}
 }
